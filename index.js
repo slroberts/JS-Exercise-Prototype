@@ -89,6 +89,19 @@ Car.prototype.drive = function (distance) {
     this.odometer = distance + this.odometer;
     this.tank = this.odometer / this.milesPerGallon;
   }
+
+  // else if (Math.abs(this.tank - distance / this.milesPerGallon) <= 0) {
+  //   return (
+  //     "I ran out of fuel at " +
+  //     Math.abs(distance + (this.tank - distance / this.milesPerGallon)) +
+  //     " miles!"
+  //   );
+  // }
+
+  // else if (this.tank < distance) {
+  //   this.tank = this.odometer * this.distance;
+  //   return `I ran out of fuel at ${this.tank} miles!`;
+  // }
 };
 
 /*
@@ -113,17 +126,12 @@ Baby.prototype.play = function () {
 /* 
   TASK 4
   
-'this' bindings
-1. Window/Global - 'this' is placed globally
-2. Implicit - 'this' in methods in objects
-3. New - 'new' followed by a Contructor invocation to create an Object
-4. Explicit - call/apply/bind methods to point `this` to a specific Object
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  - Window/Global - 'this' is global and it refers to the window object.
+  - Implicit - 'this' refers to the methods in the object.
+  - New - 'this' refers to create a new Object with invocation from the constructor.
+  - Explicit  - 'this' refers to a specific object pointed by call/apply/bind methods
 */
 
 ///////// END OF CHALLENGE /////////
