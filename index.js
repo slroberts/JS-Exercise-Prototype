@@ -19,7 +19,6 @@ Airplane.prototype.land = function () {
   this.isFlying = false;
 };
 
-
 /*
 // 👇 COMPLETE YOUR WORK BELOW 👇
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -39,9 +38,27 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function (someFood) {
+  if (someFood <= 10) {
+    this.stomach.push(someFood);
+  }
+};
+
+Person.prototype.poop = function () {
+  if (this.stomach.length <= 10) {
+    this.stomach.length = 0;
+  }
+};
+
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`;
+};
 
 /*
   TASK 2
@@ -57,9 +74,35 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function (gallons) {
+  this.tank = gallons + this.tank;
+};
+
+Car.prototype.drive = function (distance) {
+  if (distance > this.odometer) {
+    this.odometer = distance + this.odometer;
+    this.tank = this.odometer / this.milesPerGallon;
+  }
+
+  // else if (Math.abs(this.tank - distance / this.milesPerGallon) <= 0) {
+  //   return (
+  //     "I ran out of fuel at " +
+  //     Math.abs(distance + (this.tank - distance / this.milesPerGallon)) +
+  //     " miles!"
+  //   );
+  // }
+
+  // else if (this.tank < distance) {
+  //   this.tank = this.odometer * this.distance;
+  //   return `I ran out of fuel at ${this.tank} miles!`;
+  // }
+};
 
 /*
   TASK 3
@@ -68,28 +111,44 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age, favoriteToy);
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
+};
 
 /* 
   TASK 4
+  
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  - Window/Global - 'this' is global and it refers to the window object.
+  - Implicit - 'this' refers to the methods in the object.
+  - New - 'this' refers to create a new Object with invocation from the constructor.
+  - Explicit  - 'this' refers to a specific object pointed by call/apply/bind methods
 */
 
-
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
-  module.exports = module.exports || {}
-  if (Airplane) { module.exports.Airplane = Airplane }
-  if (Person) { module.exports.Person = Person }
-  if (Car) { module.exports.Car = Car }
-  if (Baby) { module.exports.Baby = Baby }
+if (typeof exports !== "undefined") {
+  module.exports = module.exports || {};
+  if (Airplane) {
+    module.exports.Airplane = Airplane;
+  }
+  if (Person) {
+    module.exports.Person = Person;
+  }
+  if (Car) {
+    module.exports.Car = Car;
+  }
+  if (Baby) {
+    module.exports.Baby = Baby;
+  }
 }
